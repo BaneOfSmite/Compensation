@@ -19,20 +19,25 @@ public class Compensator extends BukkitRunnable {
 
 	public void run() {
 		if (this.player.isOnline()) {
-			Player p = this.player.getPlayer();
-			p.setMaxHealth(p.getMaxHealth() + this.compensation);
-			p.setHealth(p.getHealth() + this.compensation - (double) this.hearts);
-			p.addPotionEffect(
-					new PotionEffect(PotionEffectType.REGENERATION, this.getDuration(p) + this.hearts * 50, 0), true);
-			this.cancel();
+			if (Main.getCompensationv()) {
+				Player p = this.player.getPlayer();
+				p.setMaxHealth(p.getMaxHealth() + this.compensation);
+				p.setHealth(p.getHealth() + this.compensation - (double) this.hearts);
+				p.addPotionEffect(
+						new PotionEffect(PotionEffectType.REGENERATION, this.getDuration(p) + this.hearts * 50, 0),
+						true);
+				this.cancel();
+			}
 		}
 	}
 
 	private int getDuration(Player player) {
-		for (PotionEffect effect : player.getActivePotionEffects()) {
-			if (!effect.getType().equals((Object) PotionEffectType.REGENERATION))
-				continue;
-			return effect.getDuration();
+		if (Main.getCompensationv()) {
+			for (PotionEffect effect : player.getActivePotionEffects()) {
+				if (!effect.getType().equals((Object) PotionEffectType.REGENERATION))
+					continue;
+				return effect.getDuration();
+			}
 		}
 		return 0;
 	}
