@@ -1,0 +1,14 @@
+name: Compensation
+main: me.baneofsmite.compensation.Main
+version: 1.1
+author: BaneOfSmite
+
+commands:
+  compensation:
+    description: Toggles Compensation
+    usage: /<command>
+    permission: BaneUHC.Op
+
+permissions:
+  BaneUHC.Op:
+    description: Gives access to Compensation
